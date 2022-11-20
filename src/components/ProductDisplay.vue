@@ -62,7 +62,12 @@ function updateVariant(index) {
         <p v-else>Out of Stock</p>
         <p>Shipping: {{ shipping }}</p>
         <ul>
-          <li v-for="detail in details">{{ detail }}</li>
+          <li 
+            v-for="(detail, index) in details" 
+            :key="index"
+          >
+            {{ detail }}
+          </li>
         </ul>
         <div 
           v-for="(variant, index) in variants" 
