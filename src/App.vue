@@ -15,7 +15,7 @@ function updateCart(id) {
   <div class="h-16 mb-6 bg-gradient-to-r from-ocean to-leaf"></div>
 
   <!--.cart-->
-  <div class="my-6 mx-24 p-7 border border-solid border-mist bg-cloud float-right">
+  <div class="my-6 mx-24 p-7 mist-border-1 bg-cloud float-right">
     Cart({{ cart.length }})
   </div>
 

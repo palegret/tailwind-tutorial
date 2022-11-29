@@ -57,7 +57,7 @@ function updateVariant(index) {
     <div class="flex flex-row flex-wrap">
       <!-- .product-image -->
       <div class="w-[100%] md:w-[50%]">
-        <img v-bind:src="image" class="w-[70%] m-10 p-4 border-2 border-solid border-mist">
+        <img v-bind:src="image" class="w-[70%] m-10 p-4 mist-border-2">
       </div>
       <!-- .product-info -->
       <div class="w-[100%] ml-3 md:w-[50%] md:ml-0">
@@ -76,11 +76,11 @@ function updateVariant(index) {
 
         <!-- 
         Tailwind code scanning requires background class be static, e.g., 
-        .bg-[green], not dynamically-generated e.g., .bg-[ = green + ].
+        .bg-[green], not dynamically-generated e.g., .bg-[ = greenColor + ].
         -->
         <div 
           v-for="(variant, index) in variants" 
-          class="w-12 h-12 mt-2 border-2 border-solid border-mist rounded-[50%] cursor-pointer" 
+          class="w-12 h-12 mt-2 mist-border-2 rounded-[50%] cursor-pointer" 
           :class="{
             green: 'bg-[green]',
             blue: 'bg-[blue]',
@@ -135,7 +135,7 @@ function updateVariant(index) {
   padding: 15px;
   /* p-4 */
   border: 2px solid #d8d8d8;
-  /* border-2 border-solid border-[#d8d8d8] */
+  /* border-2 border-solid bg-mist AKA border-[#d8d8d8] */
 }
 
 .product-info {
@@ -180,20 +180,20 @@ function updateVariant(index) {
     inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
   /* Moved to index.css as .btn-shading-bn */  
   background-color: #39495c;
-  /* bg-[#39495c] */
+  /* bg-midnight AKA bg-[#39495c] */
   cursor: pointer;
   /* cursor-pointer */
 }
 
 .button.disabled {
   background-color: #d8d8d8;
-  /*  */
+  /* bg-mist */
   cursor: not-allowed;
-  /*  */
+  /* cursor-not-allowed */
 }
 
 @media only screen and (min-width: 860px) {
-/* md: --> Breakpoint Modifier */
+/* md: --> Breakpoint Modifier (Custom, Tailwind default is 768px) */
 
   .product-image {
     width: 50%;
