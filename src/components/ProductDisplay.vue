@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import socksBlueImage from '../assets/socks_blue.jpg'
 import socksGreenImage from '../assets/socks_green.jpg'
+import StyledButton from './StyledButton.vue'
+import ResponsiveWidth from './ResponsiveWidth.vue'
 
 const props = defineProps({
   premium: {
@@ -56,52 +58,49 @@ function updateVariant(index) {
     <!-- .product-container -->
     <div class="flex flex-row flex-wrap">
       <!-- .product-image -->
-      <div class="w-[100%] md:w-[50%]">
+      <ResponsiveWidth>
         <img v-bind:src="image" class="w-[70%] m-10 p-4 mist-border-2">
-      </div>
+      </ResponsiveWidth>
       <!-- .product-info -->
-      <div class="w-[100%] ml-3 md:w-[50%] md:ml-0">
-        <h1>{{ title }}</h1>
-        <p v-if="inStock">In Stock</p>
-        <p v-else>Out of Stock</p>
-        <p>Shipping: {{ shipping }}</p>
-        <ul>
-          <li 
-            v-for="(detail, index) in details" 
-            :key="index"
-          >
-            {{ detail }}
-          </li>
-        </ul>
+      <ResponsiveWidth>
+        <div class="ml-3 md:ml-0">
+          <h1>{{ title }}</h1>
+          <p v-if="inStock">In Stock</p>
+          <p v-else>Out of Stock</p>
+          <p>Shipping: {{ shipping }}</p>
+          <ul>
+            <li 
+              v-for="(detail, index) in details" 
+              :key="index"
+            >
+              {{ detail }}
+            </li>
+          </ul>
 
-        <!-- 
-        Tailwind code scanning requires background class be static, e.g., 
-        .bg-[green], not dynamically-generated e.g., .bg-[ = greenColor + ].
-        -->
-        <div 
-          v-for="(variant, index) in variants" 
-          class="w-12 h-12 mt-2 mist-border-2 rounded-[50%] cursor-pointer" 
-          :class="{
-            green: 'bg-[green]',
-            blue: 'bg-[blue]',
-          }[variant.color]"
-          :key="variant.id" 
-          @mouseover="updateVariant(index)" 
-        >
+          <!-- 
+          Tailwind code scanning requires background class be static, e.g., 
+          .bg-[green], not dynamically-generated e.g., .bg-[ = greenColor + ].
+          -->
+          <div 
+            v-for="(variant, index) in variants" 
+            class="w-12 h-12 mt-2 mist-border-2 rounded-[50%] cursor-pointer" 
+            :class="{
+              green: 'bg-[green]',
+              blue: 'bg-[blue]',
+            }[variant.color]"
+            :key="variant.id" 
+            @mouseover="updateVariant(index)" 
+          >
+          </div>
+          
+          <StyledButton 
+            :is-active="inStock" 
+            @click="addToCart"
+          >
+            Add to Cart
+          </StyledButton> 
         </div>
-        
-        <!-- Note use of array in :class binding, instead of string -->
-        <button 
-          class="w-40 h-16 m-8 p-5 text-lg leading-none text-cloud text-center rounded-[5px] btn-shading-bn" 
-          :class="inStock ? 
-            ['bg-midnight', 'cursor-pointer'] : 
-            ['bg-mist', 'cursor-not-allowed']"
-          :disabled="!inStock" 
-          @click="addToCart"
-        >
-          Add to Cart
-        </button>
-      </div>
+      </ResponsiveWidth>
     </div>
   </div>
 </template>
